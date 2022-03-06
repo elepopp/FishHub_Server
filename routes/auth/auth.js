@@ -26,7 +26,7 @@ module.exports = async function (ctx, next) {
           }
         }
       } catch (error) {
-      }
+      } 
     }
   }
 

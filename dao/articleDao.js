@@ -1,8 +1,7 @@
 const mongoose = require("mongoose"); //引入mongoose
 const articleModel = mongoose.model("article");
 const commentModel = mongoose.model("comment");
-const orderModel = mongoose.model("order");
-const recordModel = mongoose.model("record");
+
 
 // 获取文档列表
 const getArticleList = async ({ _filter, _sort, _skip, _limit }) => {

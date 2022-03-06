@@ -27,7 +27,7 @@ router
     let body = ctx.request.body;
     const res = await userService.postUsers(body);
     ctx.body = res;
-  });
+  }); 
 
 module.exports = router.routes();
   

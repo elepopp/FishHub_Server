@@ -1,7 +1,6 @@
 const Router = require("koa-router");
 const router = new Router();
 const recordService = require("../../service/recordService");
-const orderService = require("../../service/orderService");
 const userService = require("../../service/userService");
 
 /**
@@ -31,11 +30,7 @@ router
     var query = ctx.request.query;
     query.user_id = ctx.user_id;
     var res = {};
-    if (query.type == "buyed") {
-      res = await orderService.getOrderList(query);
-    } else {
-      res = await recordService.getUserRecordList(query);
-    }
+    res = await recordService.getUserRecordList(query);
     ctx.body = res;
   })
   .get("/user/operation/group", async (ctx, next) => {
