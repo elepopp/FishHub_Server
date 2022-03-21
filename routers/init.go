@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"Fish_Hub/controller"
 	"Fish_Hub/rsp"
 	"Fish_Hub/setting"
 	"net/http"
@@ -14,13 +15,23 @@ func InitRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.Default()
-
+	// 未找到路由
 	r.NoMethod(HandleNotFound)
 	r.NoRoute(HandleNotFound)
 
-	Auth(r)
-	Front(r)
-	// r.Use(controller.Authorize()) //以下的接口，都使用Authorize()中间件身份验证;以上的接口，不需要Authorize()中间件身份验证
+	// 不需要登录的路由
+	r.GET("/wxlogin/", controller.WxLogin)
+
+	r.GET("/front/article/list", controller.ListArticle)
+	r.GET("/front/article/:id", controller.GetAArticle)
+	r.GET("/front/topic/list", controller.ListArticle)
+	r.GET("/front/topic/:id", controller.GetATopic)
+	r.POST("/front/comment", controller.CreateAComment)
+	// 以上的接口，不需要Authorize()中间件身份验证;
+	r.Use(controller.Authorize())
+	// 以下的接口，都使用Authorize()中间件身份验证;
+	// ····
+	// 运营端
 	Adm(r)
 
 	return r
