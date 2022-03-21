@@ -8,11 +8,16 @@ import (
 type Comment struct {
 	BaseModel
 
-	Name    string `form:"name" json:"name" binding:"required" gorm:"size:120"`
-	Type    int    `form:"type" json:"type" binding:"required"`
-	Email   string `form:"email" json:"email"  binding:"required"  gorm:"size:120"`
-	Content string `form:"content" json:"content"   binding:"required"  gorm:"type:longtext"`
-	Purpose string `form:"purpose" json:"purpose"  binding:"required"  gorm:"size:120"`
+	ArticleId int        `form:"article_id" json:"article_id"`
+	Content   string     `form:"content" json:"content"   binding:"required"  gorm:"type:longtext"`
+	Type      int        `form:"type" json:"type"   gorm:"size:5"`
+	LikeNum   int        `form:"like_num" json:"like_num"`
+	UserId    int        `form:"user_id" json:"user_id"  gorm:"not null"`
+	User      *User      `json:"user"  gorm:"PRELOAD:false"`
+	CommentId int        `form:"comment_id" json:"comment_id"`
+	ReplyId   int        `form:"reply_id" json:"reply_id"`
+	Reply     *User      `form:"reply" json:"reply"`
+	Comment   []*Comment `json:"comment"  gorm:"PRELOAD:false"`
 }
 
 func ListComment(page int, limit int) (commentList []*Comment, total int, err error) {
@@ -21,7 +26,7 @@ func ListComment(page int, limit int) (commentList []*Comment, total int, err er
 		return nil, 0, err
 	}
 
-	if err = Db.Scopes(utils.Paginate(page, limit)).Order("updated_at desc").Find(&commentList).Error; err != nil {
+	if err = Db.Order("updated_at desc").Scopes(utils.Paginate(page, limit)).Preload("Reply").Preload("User").Preload("Comment").Find(&commentList).Error; err != nil {
 		return nil, 0, err
 	}
 

@@ -23,7 +23,18 @@ type User struct {
 	Password    string     `form:"password" json:"-"  gorm:"size:120"`
 	Phone       string     `form:"phone" json:"phone"  gorm:"size:120"`
 	Email       string     `form:"email" json:"email" gorm:"size:120"`
-	Facebook    string     `form:"facebook" json:"facebook"   gorm:"size:3000"`
+	Blog        string     `form:"facebook" json:"facebook"   gorm:"size:3000"`
+	Gender      int        `form:"gender" json:"gender"   gorm:"size:1"`
+	Location    string     `form:"location" json:"location"   gorm:"size:500"`
+	School      string     `form:"school" json:"school"   gorm:"size:500"`
+	Type        int        `form:"type" json:"type"   gorm:"size:5"`
+	Status      int        `form:"status" json:"status"   gorm:"size:5"`
+	Company     string     `form:"company" json:"company"   gorm:"size:500"`
+	WxOpenid    string     `form:"wx_openid" json:"wx_openid"   gorm:"size:500"`
+
+	LikeNum    int `form:"like_num" json:"like_num" `
+	CommentNum int `form:"comment_num" json:"comment_num"`
+	ArticleNum int `form:"article_num" json:"article_num"`
 }
 
 // 登录

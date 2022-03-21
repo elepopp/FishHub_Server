@@ -39,10 +39,10 @@ func main() {
 
 	// 数据库和结构体一一对应
 	dao.Db.AutoMigrate(
-		&model.Series{},
+		&model.Article{},
 		&model.User{},
-		&model.Work{},
-		&model.Poetry{},
+		&model.Tag{},
+		&model.Topic{},
 		&model.Comment{},
 	)
 

@@ -1,7 +1,6 @@
 package routers
 
 import (
-	"Fish_Hub/controller"
 	"Fish_Hub/rsp"
 	"Fish_Hub/setting"
 	"net/http"
@@ -21,7 +20,7 @@ func InitRouter() *gin.Engine {
 
 	Auth(r)
 	Front(r)
-	r.Use(controller.Authorize()) //以下的接口，都使用Authorize()中间件身份验证;以上的接口，不需要Authorize()中间件身份验证
+	// r.Use(controller.Authorize()) //以下的接口，都使用Authorize()中间件身份验证;以上的接口，不需要Authorize()中间件身份验证
 	Adm(r)
 
 	return r

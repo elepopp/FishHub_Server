@@ -10,11 +10,11 @@ import (
 func Front(r *gin.Engine) {
 	front := r.Group("front")
 	{
-		front.GET("/series/list", controller.ListSeries)
-		front.GET("/series/:id", controller.GetASeries)
+		front.GET("/article/list", controller.ListArticle)
+		front.GET("/article/:id", controller.GetAArticle)
 
-		front.GET("/poetry/list", controller.ListSeries)
-		front.GET("/poetry/:id", controller.GetAPoetry)
+		front.GET("/topic/list", controller.ListArticle)
+		front.GET("/topic/:id", controller.GetATopic)
 
 		front.POST("/comment", controller.CreateAComment)
 	}
